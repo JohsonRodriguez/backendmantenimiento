@@ -9,8 +9,12 @@ public class ProductServiceImpl implements ProductService{
 
     private ProductRepository productRepository;
 
+    public ProductServiceImpl(ProductRepository productRepository){
+        this.productRepository = productRepository;
+    }
+
     @Override
-    public Iterable<Product> listCar() {
+    public Iterable<Product> listProduct() {
         return productRepository.findAll();
     }
 
