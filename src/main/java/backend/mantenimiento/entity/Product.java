@@ -23,7 +23,7 @@ public class Product {
     private Long id;
    private  String name ;
     private String brand;
-    private float amount;
+    private float stock;
     private String unit;
 
 }
