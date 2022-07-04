@@ -25,6 +25,9 @@ public class InputServiceImpl implements InputService{
     ProductRepository productRepository;
 
     @Autowired
+    ProductService productService;
+
+    @Autowired
     UsersRepository usersRepository;
     @Override
     public Iterable<Input> listInput() {
@@ -38,7 +41,7 @@ public class InputServiceImpl implements InputService{
       var product=(productRepository.findById(inputDto.getProduct())).get();
       var day = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
       var amount=inputDto.getAmount();
-
+      productService.updateStock(amount,product.getId());
       var input = new Input();
       input.setDay(day);
       input.setAmount(amount);

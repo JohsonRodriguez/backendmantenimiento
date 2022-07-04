@@ -24,8 +24,18 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
-    public void updateStock(Product product) {
-        productRepository.save(product);
+    public void updateStock(Float amount, Long id) {
+           var product = (productRepository.findById(id)).get();
+           var stock = product.getStock() + amount;
+           productRepository.newStock(stock,product.getId());
+    }
+
+    @Override
+    public void reduceStock(Float amount, Long id) {
+        var product = (productRepository.findById(id)).get();
+        var stock = product.getStock() - amount;
+        productRepository.newStock(stock,product.getId());
+
     }
 
     @Override
