@@ -1,5 +1,6 @@
 package backend.mantenimiento.services;
 
+import backend.mantenimiento.Dto.OutputCountDto;
 import backend.mantenimiento.Dto.OutputDto;
 import backend.mantenimiento.entity.Input;
 import backend.mantenimiento.entity.Output;
@@ -57,5 +58,11 @@ public class OutputServiceImpl implements OutputService{
         output.setEmployee(employee);
         outputRepository.save(output);
 
+    }
+
+    @Override
+    public float getTotalAmount(OutputCountDto outputCountDto) {
+        return outputRepository.totalAmount(outputCountDto.getLocation(),
+                outputCountDto.getProduct(),outputCountDto.getDate());
     }
 }
