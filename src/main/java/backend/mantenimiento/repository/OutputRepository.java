@@ -18,7 +18,7 @@ public interface OutputRepository extends CrudRepository<Output,Long> {
     //@Modifying
     //@Transactional
     // @Query("SELECT o.location.id, SUM(o.amount) as total  FROM Output o WHERE o.product.id=:product AND o.day LIKE :date% group by o.location.id order by total desc")
-    @Query("SELECT new backend.mantenimiento.Dto.OutputTotalDto(o.location.id,SUM(o.amount))  FROM Output as o WHERE o.product.id=:product AND o.day LIKE :date% group by o.location.id")
+    @Query("SELECT new backend.mantenimiento.Dto.OutputTotalDto(o.location.name,SUM(o.amount))  FROM Output as o WHERE o.product.id=:product AND o.day LIKE :date% group by o.location.name")
     ArrayList<OutputTotalDto> totalAmount (@Param(value = "product")Long idproduct,
                                            @Param(value = "date")String date);
 

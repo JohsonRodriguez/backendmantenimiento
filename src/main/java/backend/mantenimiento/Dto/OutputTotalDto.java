@@ -11,11 +11,11 @@ import java.util.HashMap;
 @Setter
 
 public class OutputTotalDto {
-   private Long location;
+   private String name;
     private Double total;
 
-    public OutputTotalDto(Long location, Double total) {
-        this.location = location;
+    public OutputTotalDto( String name, Double total) {
+        this.name = name;
         this.total = total;
     }
 }
