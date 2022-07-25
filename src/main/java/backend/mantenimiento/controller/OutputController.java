@@ -3,9 +3,15 @@ package backend.mantenimiento.controller;
 
 import backend.mantenimiento.Dto.OutputCountDto;
 import backend.mantenimiento.Dto.OutputDto;
+import backend.mantenimiento.Dto.OutputTotalDto;
 import backend.mantenimiento.entity.Output;
 import backend.mantenimiento.services.OutputService;
+import org.hibernate.mapping.Array;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 @RestController
 @CrossOrigin("*")
@@ -35,7 +41,7 @@ public class OutputController {
 //      return   outputService.getTotalAmount(idlocation,idproduct,date);
 //    }
     @GetMapping("/sum")
-    public float getSumAmount(@RequestBody OutputCountDto outputCountDto){
+    public ArrayList<OutputTotalDto> getSumAmount(@RequestBody OutputCountDto outputCountDto){
         return   outputService.getTotalAmount(outputCountDto);
     }
 

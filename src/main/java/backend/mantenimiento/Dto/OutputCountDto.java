@@ -8,7 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class OutputCountDto {
-    private Long location;
+
     private Long product;
     private String date;
 

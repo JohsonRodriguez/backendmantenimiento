@@ -2,14 +2,15 @@ package backend.mantenimiento.services;
 
 import backend.mantenimiento.Dto.OutputCountDto;
 import backend.mantenimiento.Dto.OutputDto;
-import backend.mantenimiento.entity.Input;
+import backend.mantenimiento.Dto.OutputTotalDto;
 import backend.mantenimiento.entity.Output;
 import backend.mantenimiento.repository.*;
+import org.hibernate.mapping.Array;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.*;
 
 @Service
 public class OutputServiceImpl implements OutputService{
@@ -61,8 +62,16 @@ public class OutputServiceImpl implements OutputService{
     }
 
     @Override
-    public float getTotalAmount(OutputCountDto outputCountDto) {
-        return outputRepository.totalAmount(outputCountDto.getLocation(),
-                outputCountDto.getProduct(),outputCountDto.getDate());
+    public ArrayList<OutputTotalDto> getTotalAmount(OutputCountDto outputCountDto) {
+       ArrayList arrayList = outputRepository.totalAmount(outputCountDto.getProduct(),outputCountDto.getDate());
+        Collections.sort(arrayList, new Comparator<OutputTotalDto>() {
+
+            @Override
+            public int compare(OutputTotalDto o1, OutputTotalDto o2) {
+                return (o2.getTotal()).compareTo((o1.getTotal()));
+            }
+        });
+        return arrayList;
+//        return outputRepository.totalAmount(outputCountDto.getProduct(),outputCountDto.getDate());
     }
 }
