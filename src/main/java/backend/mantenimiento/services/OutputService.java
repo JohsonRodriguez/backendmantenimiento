@@ -1,6 +1,7 @@
 package backend.mantenimiento.services;
 
 
+import backend.mantenimiento.Dto.EmployeeTotalDto;
 import backend.mantenimiento.Dto.OutputCountDto;
 import backend.mantenimiento.Dto.OutputDto;
 import backend.mantenimiento.Dto.OutputTotalDto;
@@ -15,4 +16,5 @@ public interface OutputService {
     Iterable<Output> listOutput();
     void newOutput(OutputDto outputDto);
     ArrayList<OutputTotalDto> getTotalAmount(OutputCountDto outputCountDto);
+    ArrayList<EmployeeTotalDto> getTotalAmountEmployee(OutputCountDto outputCountDto);
 }

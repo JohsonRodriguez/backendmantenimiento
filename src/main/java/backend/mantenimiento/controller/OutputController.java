@@ -1,6 +1,7 @@
 package backend.mantenimiento.controller;
 
 
+import backend.mantenimiento.Dto.EmployeeTotalDto;
 import backend.mantenimiento.Dto.OutputCountDto;
 import backend.mantenimiento.Dto.OutputDto;
 import backend.mantenimiento.Dto.OutputTotalDto;
@@ -43,6 +44,11 @@ public class OutputController {
     @PostMapping("/sum")
     public ArrayList<OutputTotalDto> getSumAmount(@RequestBody OutputCountDto outputCountDto){
         return   outputService.getTotalAmount(outputCountDto);
+    }
+
+    @PostMapping("/sumemployee")
+    public ArrayList<EmployeeTotalDto> getSumAmountEmployee(@RequestBody OutputCountDto outputCountDto){
+        return   outputService.getTotalAmountEmployee(outputCountDto);
     }
 
 }

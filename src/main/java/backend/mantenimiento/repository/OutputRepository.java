@@ -1,5 +1,6 @@
 package backend.mantenimiento.repository;
 
+import backend.mantenimiento.Dto.EmployeeTotalDto;
 import backend.mantenimiento.Dto.OutputTotalDto;
 
 import backend.mantenimiento.entity.Output;
@@ -21,5 +22,9 @@ public interface OutputRepository extends CrudRepository<Output,Long> {
     @Query("SELECT new backend.mantenimiento.Dto.OutputTotalDto(o.location.name,SUM(o.amount))  FROM Output as o WHERE o.product.id=:product AND o.day LIKE :date% group by o.location.name")
     ArrayList<OutputTotalDto> totalAmount (@Param(value = "product")Long idproduct,
                                            @Param(value = "date")String date);
+
+    @Query("SELECT new backend.mantenimiento.Dto.EmployeeTotalDto(o.employee.id,o.employee.name,o.employee.lastname,SUM(o.amount))  FROM Output as o WHERE o.product.id=:product AND o.day LIKE :date% group by o.employee.id,o.employee.name,o.employee.lastname")
+    ArrayList<EmployeeTotalDto> totalAmountEmployee (@Param(value = "product")Long idproduct,
+                                                     @Param(value = "date")String date);
 
 }

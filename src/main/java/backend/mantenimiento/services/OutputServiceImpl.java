@@ -1,5 +1,6 @@
 package backend.mantenimiento.services;
 
+import backend.mantenimiento.Dto.EmployeeTotalDto;
 import backend.mantenimiento.Dto.OutputCountDto;
 import backend.mantenimiento.Dto.OutputDto;
 import backend.mantenimiento.Dto.OutputTotalDto;
@@ -73,5 +74,18 @@ public class OutputServiceImpl implements OutputService{
         });
         return arrayList;
 //        return outputRepository.totalAmount(outputCountDto.getProduct(),outputCountDto.getDate());
+    }
+
+    @Override
+    public ArrayList<EmployeeTotalDto> getTotalAmountEmployee(OutputCountDto outputCountDto) {
+        ArrayList arrayListEmployee = outputRepository.totalAmountEmployee(outputCountDto.getProduct(),outputCountDto.getDate());
+        Collections.sort(arrayListEmployee, new Comparator<EmployeeTotalDto>() {
+
+            @Override
+            public int compare(EmployeeTotalDto e1, EmployeeTotalDto e2) {
+                return (e2.getTotal()).compareTo((e1.getTotal()));
+            }
+        });
+        return  arrayListEmployee;
     }
 }
