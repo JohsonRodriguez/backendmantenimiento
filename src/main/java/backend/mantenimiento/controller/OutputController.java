@@ -40,7 +40,7 @@ public class OutputController {
 //    public float getSumAmount(@PathVariable Long idlocation,@PathVariable Long idproduct,@PathVariable String date){
 //      return   outputService.getTotalAmount(idlocation,idproduct,date);
 //    }
-    @GetMapping("/sum")
+    @PostMapping("/sum")
     public ArrayList<OutputTotalDto> getSumAmount(@RequestBody OutputCountDto outputCountDto){
         return   outputService.getTotalAmount(outputCountDto);
     }
