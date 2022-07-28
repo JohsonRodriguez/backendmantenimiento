@@ -1,6 +1,7 @@
 package backend.mantenimiento.services;
 
 
+import backend.mantenimiento.Dto.AllIput;
 import backend.mantenimiento.Dto.InputDto;
 import backend.mantenimiento.entity.Input;
 import backend.mantenimiento.entity.Product;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 @Service
@@ -53,5 +55,11 @@ public class InputServiceImpl implements InputService{
     @Override
     public void updateInput(Input input) {
         inputRepository.save(input);
+    }
+
+    @Override
+    public ArrayList<AllIput> getAllInput(String day) {
+        ArrayList<AllIput> allInputs = inputRepository.totalInput(day);
+        return allInputs;
     }
 }

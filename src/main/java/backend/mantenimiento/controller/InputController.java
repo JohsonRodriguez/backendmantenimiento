@@ -1,10 +1,13 @@
 package backend.mantenimiento.controller;
 
 
+import backend.mantenimiento.Dto.AllIput;
 import backend.mantenimiento.Dto.InputDto;
 import backend.mantenimiento.entity.Input;
 import backend.mantenimiento.services.InputService;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
 
 @RestController
 @CrossOrigin("*")
@@ -30,5 +33,11 @@ public class InputController {
     public void updateInput(@RequestBody Input input){
         inputService.updateInput(input);
     }
+
+    @PostMapping("/getall/{day}")
+    public ArrayList<AllIput> getAllInputs(@PathVariable String day) {
+       return inputService.getAllInput(day);
+    }
+
 
    }
