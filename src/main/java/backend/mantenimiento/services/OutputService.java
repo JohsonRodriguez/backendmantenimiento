@@ -1,10 +1,7 @@
 package backend.mantenimiento.services;
 
 
-import backend.mantenimiento.Dto.EmployeeTotalDto;
-import backend.mantenimiento.Dto.OutputCountDto;
-import backend.mantenimiento.Dto.OutputDto;
-import backend.mantenimiento.Dto.OutputTotalDto;
+import backend.mantenimiento.Dto.*;
 import backend.mantenimiento.entity.Output;
 import org.hibernate.mapping.Array;
 
@@ -17,4 +14,5 @@ public interface OutputService {
     void newOutput(OutputDto outputDto);
     ArrayList<OutputTotalDto> getTotalAmount(OutputCountDto outputCountDto);
     ArrayList<EmployeeTotalDto> getTotalAmountEmployee(OutputCountDto outputCountDto);
+    ArrayList<AllOutputs>getAllOutputs(String day);
 }

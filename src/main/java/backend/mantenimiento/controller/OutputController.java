@@ -1,13 +1,11 @@
 package backend.mantenimiento.controller;
 
 
-import backend.mantenimiento.Dto.EmployeeTotalDto;
-import backend.mantenimiento.Dto.OutputCountDto;
-import backend.mantenimiento.Dto.OutputDto;
-import backend.mantenimiento.Dto.OutputTotalDto;
+import backend.mantenimiento.Dto.*;
 import backend.mantenimiento.entity.Output;
 import backend.mantenimiento.services.OutputService;
 import org.hibernate.mapping.Array;
+import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -49,6 +47,11 @@ public class OutputController {
     @PostMapping("/sumemployee")
     public ArrayList<EmployeeTotalDto> getSumAmountEmployee(@RequestBody OutputCountDto outputCountDto){
         return   outputService.getTotalAmountEmployee(outputCountDto);
+    }
+
+    @PostMapping("/allbyday/{day}")
+    public ArrayList<AllOutputs> getAllOutputsbyDay(@PathVariable String day){
+        return   outputService.getAllOutputs(day);
     }
 
 }

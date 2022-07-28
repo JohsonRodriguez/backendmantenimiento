@@ -1,9 +1,6 @@
 package backend.mantenimiento.services;
 
-import backend.mantenimiento.Dto.EmployeeTotalDto;
-import backend.mantenimiento.Dto.OutputCountDto;
-import backend.mantenimiento.Dto.OutputDto;
-import backend.mantenimiento.Dto.OutputTotalDto;
+import backend.mantenimiento.Dto.*;
 import backend.mantenimiento.entity.Output;
 import backend.mantenimiento.repository.*;
 import org.hibernate.mapping.Array;
@@ -87,5 +84,11 @@ public class OutputServiceImpl implements OutputService{
             }
         });
         return  arrayListEmployee;
+    }
+
+    @Override
+    public ArrayList<AllOutputs> getAllOutputs(String day) {
+        ArrayList<AllOutputs> allOutputsList = outputRepository.OutputsbyDay(day);
+        return allOutputsList;
     }
 }
