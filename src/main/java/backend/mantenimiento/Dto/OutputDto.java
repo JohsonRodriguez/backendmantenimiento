@@ -9,7 +9,8 @@ import lombok.Setter;
 @Setter
 public class OutputDto {
     private float amount;
-    private Long product;
+    private String productName;
+    private String productBrand;
     private Long users;
     private Long employee;
     private Long location;

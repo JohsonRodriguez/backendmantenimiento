@@ -29,11 +29,6 @@ public class InputController {
         inputService.newInput(inputDto);
     }
 
-    @PutMapping("/update")
-    public void updateInput(@RequestBody Input input){
-        inputService.updateInput(input);
-    }
-
     @PostMapping("/getall/{day}")
     public ArrayList<AllIput> getAllInputs(@PathVariable String day) {
        return inputService.getAllInput(day);

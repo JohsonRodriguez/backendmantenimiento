@@ -24,9 +24,9 @@ public class Output {
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Users users;
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "product_id")
+    @JoinColumn(name = "stock_id")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private Product product;
+    private Stock stock;
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "location_id")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})

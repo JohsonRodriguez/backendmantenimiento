@@ -2,8 +2,9 @@ package backend.mantenimiento.services;
 
 import backend.mantenimiento.Dto.*;
 import backend.mantenimiento.entity.Output;
+import backend.mantenimiento.entity.Stock;
+import backend.mantenimiento.exception.NotFoundException;
 import backend.mantenimiento.repository.*;
-import org.hibernate.mapping.Array;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,9 +15,11 @@ import java.util.*;
 public class OutputServiceImpl implements OutputService{
 
     private final OutputRepository outputRepository;
+    private final StockService stockService;
 
-    public OutputServiceImpl(OutputRepository outputRepository) {
+    public OutputServiceImpl(OutputRepository outputRepository, StockService stockService) {
         this.outputRepository = outputRepository;
+        this.stockService = stockService;
     }
 
     @Autowired
@@ -41,21 +44,34 @@ public class OutputServiceImpl implements OutputService{
 
     @Override
     public void newOutput(OutputDto outputDto) {
-        var users  =(usersRepository.findById(outputDto.getUsers())).get();
-        var product=(productRepository.findById(outputDto.getProduct())).get();
-        var location = (locationRepository.findById(outputDto.getLocation())).get();
-        var employee= (employeeRepository.findById(outputDto.getEmployee())).get();
-        var day = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-        var amount=outputDto.getAmount();
-        productService.reduceStock(amount,product.getId());
-        var output = new Output();
-        output.setDay(day);
-        output.setAmount(amount);
-        output.setProduct(product);
-        output.setUsers(users);
-        output.setLocation(location);
-        output.setEmployee(employee);
-        outputRepository.save(output);
+        Stock stock;
+        NewStockDto newStock = new NewStockDto();
+        try {
+            newStock.setProductName(outputDto.getProductName());
+            newStock.setProductBrand(outputDto.getProductBrand());
+            newStock.setAmount(outputDto.getAmount());
+            try {
+                stock =stockService.reduceStock(newStock);
+            } catch (Exception e) {
+                throw new NotFoundException(e.getMessage());
+            }
+            var users  =(usersRepository.findById(outputDto.getUsers())).get();
+            var location = (locationRepository.findById(outputDto.getLocation())).get();
+            var employee= (employeeRepository.findById(outputDto.getEmployee())).get();
+            var day = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+            var amount=outputDto.getAmount();
+            var output = new Output();
+            output.setDay(day);
+            output.setAmount(amount);
+            output.setStock(stock);
+            output.setUsers(users);
+            output.setLocation(location);
+            output.setEmployee(employee);
+            outputRepository.save(output);
+        } catch (Exception e) {
+            throw new NotFoundException(e.getMessage());
+        }
+
 
     }
 

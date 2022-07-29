@@ -10,7 +10,6 @@ import java.util.ArrayList;
 public interface InputService {
     Iterable<Input> listInput();
     void newInput(InputDto inputDto);
-    void updateInput(Input input);
     ArrayList<AllIput> getAllInput(String day);
 
 }

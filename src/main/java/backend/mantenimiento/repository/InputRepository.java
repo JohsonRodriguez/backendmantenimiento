@@ -10,6 +10,6 @@ import org.springframework.data.repository.query.Param;
 import java.util.ArrayList;
 
 public interface InputRepository extends CrudRepository<Input,Long> {
-    @Query("SELECT new backend.mantenimiento.Dto.AllIput(i.amount,i.product.name,i.product.brand,i.users.name)  FROM Input as i WHERE i.day=:day")
+    @Query("SELECT new backend.mantenimiento.Dto.AllIput(i.amount,i.stock.product.name,i.stock.product.brand,i.users.name)  FROM Input as i WHERE i.day=:day")
     ArrayList<AllIput> totalInput (@Param(value = "day")String day);
 }

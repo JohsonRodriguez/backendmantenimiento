@@ -3,8 +3,8 @@ package backend.mantenimiento.services;
 
 import backend.mantenimiento.Dto.AllIput;
 import backend.mantenimiento.Dto.InputDto;
+import backend.mantenimiento.Dto.NewStockDto;
 import backend.mantenimiento.entity.Input;
-import backend.mantenimiento.entity.Product;
 import backend.mantenimiento.repository.InputRepository;
 import backend.mantenimiento.repository.ProductRepository;
 import backend.mantenimiento.repository.UsersRepository;
@@ -19,10 +19,8 @@ import java.util.Date;
 public class InputServiceImpl implements InputService{
 
     private final InputRepository inputRepository;
+    private final StockService  stockService;
 
-    public InputServiceImpl(InputRepository inputRepository) {
-        this.inputRepository = inputRepository;
-    }
     @Autowired
     ProductRepository productRepository;
 
@@ -31,6 +29,12 @@ public class InputServiceImpl implements InputService{
 
     @Autowired
     UsersRepository usersRepository;
+
+    public InputServiceImpl(InputRepository inputRepository, StockService stockService) {
+        this.inputRepository = inputRepository;
+        this.stockService = stockService;
+    }
+
     @Override
     public Iterable<Input> listInput() {
         return inputRepository.findAll();
@@ -39,22 +43,20 @@ public class InputServiceImpl implements InputService{
 
     @Override
     public void newInput(InputDto inputDto) {
-      var users  =(usersRepository.findById(inputDto.getUsers())).get();
-      var product=(productRepository.findById(inputDto.getProduct())).get();
-      var day = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-      var amount=inputDto.getAmount();
-      productService.updateStock(amount,product.getId());
-      var input = new Input();
+        NewStockDto newStock = new NewStockDto();
+        newStock.setProductName(inputDto.getProductName());
+        newStock.setProductBrand(inputDto.getProductBrand());
+        newStock.setAmount(inputDto.getAmount());
+        var stock=stockService.newStock(newStock);
+        var users  =(usersRepository.findById(inputDto.getUsers())).get();
+        var day = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+        var amount=inputDto.getAmount();
+        Input input = new Input();
       input.setDay(day);
       input.setAmount(amount);
-      input.setProduct(product);
+      input.setStock(stock);
       input.setUsers(users);
       inputRepository.save(input);
-    }
-
-    @Override
-    public void updateInput(Input input) {
-        inputRepository.save(input);
     }
 
     @Override

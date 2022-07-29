@@ -10,11 +10,12 @@ import javax.transaction.Transactional;
 
 public interface ProductRepository extends CrudRepository<Product,Long> {
     Product findByName(String name);
+    Product findByNameAndBrand(String name, String brand);
 
-    @Modifying
-    @Transactional
-    @Query("update Product p set p.stock = :stock where p.id = :id")
-    void  newStock (@Param(value = "stock")float stock,
-                       @Param(value = "id")Long id);
+//    @Modifying
+//    @Transactional
+//    @Query("update Product p set p.stock = :stock where p.id = :id")
+//    void  newStock (@Param(value = "stock")float stock,
+//                       @Param(value = "id")Long id);
 
 }
