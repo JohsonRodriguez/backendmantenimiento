@@ -1,8 +1,11 @@
 package backend.mantenimiento.controller;
 
+import backend.mantenimiento.Dto.ProductNameDTO;
 import backend.mantenimiento.entity.Product;
 import backend.mantenimiento.services.ProductService;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
 
 @RestController
 @CrossOrigin("*")
@@ -18,6 +21,11 @@ public class ProductController {
     @GetMapping("/all")
     public Iterable<Product> getAllProducts(){
         return productService.listProduct();
+    }
+
+    @GetMapping("/allname")
+    public ArrayList<ProductNameDTO> getAllProductsName(){
+        return productService.ProductNamedList();
     }
 
     @PostMapping("/add")

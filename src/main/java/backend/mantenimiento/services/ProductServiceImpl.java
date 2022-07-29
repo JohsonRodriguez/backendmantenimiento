@@ -1,9 +1,12 @@
 package backend.mantenimiento.services;
 
+import backend.mantenimiento.Dto.ProductNameDTO;
 import backend.mantenimiento.entity.Product;
 import backend.mantenimiento.exception.NotFoundException;
 import backend.mantenimiento.repository.ProductRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 
 @Service
 public class ProductServiceImpl implements ProductService{
@@ -30,6 +33,11 @@ public class ProductServiceImpl implements ProductService{
             throw new NotFoundException(e.getMessage());
         }
 
+    }
+
+    @Override
+    public ArrayList<ProductNameDTO> ProductNamedList() {
+        return productRepository.getProductName();
     }
 
 //    @Override

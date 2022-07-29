@@ -1,5 +1,6 @@
 package backend.mantenimiento.repository;
 
+import backend.mantenimiento.Dto.ProductNameDTO;
 import backend.mantenimiento.entity.Product;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -7,10 +8,16 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.List;
 
 public interface ProductRepository extends CrudRepository<Product,Long> {
     Product findByName(String name);
     Product findByNameAndBrand(String name, String brand);
+
+       @Query("select new backend.mantenimiento.Dto.ProductNameDTO(p.name) from Product p group by p.name")
+       ArrayList<ProductNameDTO> getProductName ();
+
 
 //    @Modifying
 //    @Transactional
