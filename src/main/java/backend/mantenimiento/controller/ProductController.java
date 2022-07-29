@@ -1,5 +1,6 @@
 package backend.mantenimiento.controller;
 
+import backend.mantenimiento.Dto.ProductBrandDto;
 import backend.mantenimiento.Dto.ProductNameDTO;
 import backend.mantenimiento.entity.Product;
 import backend.mantenimiento.services.ProductService;
@@ -26,6 +27,11 @@ public class ProductController {
     @GetMapping("/allname")
     public ArrayList<ProductNameDTO> getAllProductsName(){
         return productService.ProductNamedList();
+    }
+
+    @GetMapping("/allbrand/{name}")
+    public ArrayList<ProductBrandDto> getAllProductsBrand(@PathVariable("name") String name){
+        return productService.ProductBrandList(name);
     }
 
     @PostMapping("/add")

@@ -1,5 +1,6 @@
 package backend.mantenimiento.services;
 
+import backend.mantenimiento.Dto.ProductBrandDto;
 import backend.mantenimiento.Dto.ProductNameDTO;
 import backend.mantenimiento.entity.Product;
 import backend.mantenimiento.exception.NotFoundException;
@@ -38,6 +39,11 @@ public class ProductServiceImpl implements ProductService{
     @Override
     public ArrayList<ProductNameDTO> ProductNamedList() {
         return productRepository.getProductName();
+    }
+
+    @Override
+    public ArrayList<ProductBrandDto> ProductBrandList(String productName) {
+        return productRepository.getProductBrand(productName);
     }
 
 //    @Override

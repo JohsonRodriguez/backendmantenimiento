@@ -1,5 +1,6 @@
 package backend.mantenimiento.repository;
 
+import backend.mantenimiento.Dto.ProductBrandDto;
 import backend.mantenimiento.Dto.ProductNameDTO;
 import backend.mantenimiento.entity.Product;
 import org.springframework.data.jpa.repository.Modifying;
@@ -17,6 +18,9 @@ public interface ProductRepository extends CrudRepository<Product,Long> {
 
        @Query("select new backend.mantenimiento.Dto.ProductNameDTO(p.name) from Product p group by p.name")
        ArrayList<ProductNameDTO> getProductName ();
+
+    @Query("select new backend.mantenimiento.Dto.ProductBrandDto(p.brand) from Product p where p.name= :name")
+    ArrayList<ProductBrandDto> getProductBrand (@Param(value = "name")String name);
 
 
 //    @Modifying
