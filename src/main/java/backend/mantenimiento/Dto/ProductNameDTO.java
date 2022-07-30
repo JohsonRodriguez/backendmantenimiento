@@ -11,5 +11,5 @@ import lombok.ToString;
 @ToString
 public class ProductNameDTO {
     private String productName;
-    private String unit;
+
 }

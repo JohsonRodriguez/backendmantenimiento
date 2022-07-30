@@ -16,7 +16,7 @@ public interface ProductRepository extends CrudRepository<Product,Long> {
     Product findByName(String name);
     Product findByNameAndBrand(String name, String brand);
 
-       @Query("select new backend.mantenimiento.Dto.ProductNameDTO(p.name,p.unit) from Product p group by p.name,p.unit")
+       @Query("select new backend.mantenimiento.Dto.ProductNameDTO(p.name) from Product p group by p.name")
        ArrayList<ProductNameDTO> getProductName ();
 
     @Query("select new backend.mantenimiento.Dto.ProductBrandDto(p.brand) from Product p where p.name= :name")
