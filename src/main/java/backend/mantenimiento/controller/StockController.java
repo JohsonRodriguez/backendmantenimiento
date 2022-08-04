@@ -22,7 +22,11 @@ public class StockController {
     }
 
     @PostMapping("/add")
-    public void addStock(@RequestBody NewStockDto newStockDto){
-        stockService.newStock(newStockDto);
+    public void addStock(@RequestBody Stock stock){
+        stockService.newStock(stock);
+    }
+    @PostMapping("/less")
+    public void lessStock(@RequestBody Stock stock){
+        stockService.reduceStock(stock);
     }
 }

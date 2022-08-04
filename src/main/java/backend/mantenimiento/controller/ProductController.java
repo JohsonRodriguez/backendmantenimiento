@@ -1,6 +1,7 @@
 package backend.mantenimiento.controller;
 
 import backend.mantenimiento.Dto.ProductBrandDto;
+import backend.mantenimiento.Dto.ProductDto;
 import backend.mantenimiento.Dto.ProductNameDTO;
 import backend.mantenimiento.entity.Product;
 import backend.mantenimiento.services.ProductService;
@@ -35,8 +36,8 @@ public class ProductController {
     }
 
     @PostMapping("/add")
-    public void addProduct(@RequestBody Product product){
-        productService.newProduct(product);
+    public void addProduct(@RequestBody ProductDto productDto){
+        productService.newProduct(productDto);
     }
 
     @PutMapping("/update")

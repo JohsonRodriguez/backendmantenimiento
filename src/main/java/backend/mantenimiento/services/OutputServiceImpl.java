@@ -44,29 +44,21 @@ public class OutputServiceImpl implements OutputService{
 
     @Override
     public void newOutput(OutputDto outputDto) {
-        Stock stock;
-        NewStockDto newStock = new NewStockDto();
-        try {
-            newStock.setProductName(outputDto.getProductName());
-            newStock.setProductBrand(outputDto.getProductBrand());
-            newStock.setAmount(outputDto.getAmount());
-            try {
-                stock =stockService.reduceStock(newStock);
-            } catch (Exception e) {
-                throw new NotFoundException(e.getMessage());
-            }
-            var users  =(usersRepository.findById(outputDto.getUsers())).get();
-            var location = (locationRepository.findById(outputDto.getLocation())).get();
-            var employee= (employeeRepository.findById(outputDto.getEmployee())).get();
+        try{
             var day = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-            var amount=outputDto.getAmount();
             var output = new Output();
+            output.setAmount(outputDto.getAmount());
             output.setDay(day);
-            output.setAmount(amount);
-            output.setStock(stock);
-            output.setUsers(users);
-            output.setLocation(location);
-            output.setEmployee(employee);
+            output.setUsers(outputDto.getUsers());
+            output.setLocation(outputDto.getLocation());
+            output.setEmployee(outputDto.getEmployee());
+
+            Stock stock = new Stock();
+            stock.setProduct(outputDto.getProductName());
+            stock.setBrand(outputDto.getProductBrand());
+            stock.setStock(outputDto.getAmount());
+            stockService.reduceStock(stock);
+
             outputRepository.save(output);
         } catch (Exception e) {
             throw new NotFoundException(e.getMessage());
@@ -77,34 +69,37 @@ public class OutputServiceImpl implements OutputService{
 
     @Override
     public ArrayList<OutputTotalDto> getTotalAmount(OutputCountDto outputCountDto) {
-       ArrayList arrayList = outputRepository.totalAmount(outputCountDto.getProduct(),outputCountDto.getDate());
-        Collections.sort(arrayList, new Comparator<OutputTotalDto>() {
-
-            @Override
-            public int compare(OutputTotalDto o1, OutputTotalDto o2) {
-                return (o2.getTotal()).compareTo((o1.getTotal()));
-            }
-        });
-        return arrayList;
+//       ArrayList arrayList = outputRepository.totalAmount(outputCountDto.getProduct(),outputCountDto.getDate());
+//        Collections.sort(arrayList, new Comparator<OutputTotalDto>() {
+//
+//            @Override
+//            public int compare(OutputTotalDto o1, OutputTotalDto o2) {
+//                return (o2.getTotal()).compareTo((o1.getTotal()));
+//            }
+//        });
+//        return arrayList;
 //        return outputRepository.totalAmount(outputCountDto.getProduct(),outputCountDto.getDate());
+        return null;
     }
 
     @Override
     public ArrayList<EmployeeTotalDto> getTotalAmountEmployee(OutputCountDto outputCountDto) {
-        ArrayList arrayListEmployee = outputRepository.totalAmountEmployee(outputCountDto.getProduct(),outputCountDto.getDate());
-        Collections.sort(arrayListEmployee, new Comparator<EmployeeTotalDto>() {
-
-            @Override
-            public int compare(EmployeeTotalDto e1, EmployeeTotalDto e2) {
-                return (e2.getTotal()).compareTo((e1.getTotal()));
-            }
-        });
-        return  arrayListEmployee;
+//        ArrayList arrayListEmployee = outputRepository.totalAmountEmployee(outputCountDto.getProduct(),outputCountDto.getDate());
+//        Collections.sort(arrayListEmployee, new Comparator<EmployeeTotalDto>() {
+//
+//            @Override
+//            public int compare(EmployeeTotalDto e1, EmployeeTotalDto e2) {
+//                return (e2.getTotal()).compareTo((e1.getTotal()));
+//            }
+//        });
+//        return  arrayListEmployee;
+        return null;
     }
 
     @Override
     public ArrayList<AllOutputs> getAllOutputs(String day) {
-        ArrayList<AllOutputs> allOutputsList = outputRepository.OutputsbyDay(day);
-        return allOutputsList;
+//        ArrayList<AllOutputs> allOutputsList = outputRepository.OutputsbyDay(day);
+//        return allOutputsList;
+        return null;
     }
 }

@@ -6,6 +6,6 @@ import backend.mantenimiento.entity.Stock;
 
 public interface StockService {
     Iterable<Stock> listStock();
-    Stock newStock(NewStockDto newStockDto);
-    Stock reduceStock(NewStockDto newStockDto);
+    Stock newStock(Stock stock);
+    Stock reduceStock(Stock stock);
 }

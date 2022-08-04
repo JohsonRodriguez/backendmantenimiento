@@ -24,43 +24,45 @@ public class StockServiceImpl implements StockService{
 
     @Override
     public Iterable<Stock> listStock() {
-        return stockRepository.findAll();
+        return stockRepository.findAllByOrderByStockDesc();
     }
 
     @Override
-    public Stock newStock(NewStockDto newStockDto) {
-        Stock stock = new Stock();
-        Product product = productRepository.findByNameAndBrand(newStockDto.getProductName(),newStockDto.getProductBrand());
-        Stock checkStock=stockRepository.findByProduct(product);
+    public Stock newStock(Stock stock) {
+        Stock newStock = new Stock();
+        Stock checkStock=stockRepository.findByProductAndBrand(stock.getProduct(),stock.getBrand());
+
         try {
             if (checkStock==null) {
-                stock.setProduct(product);
-                stock.setStock(newStockDto.getAmount());
+                newStock.setProduct(stock.getProduct());
+                newStock.setBrand(stock.getBrand());
+                newStock.setStock(stock.getStock());
             }else{
                 float amount = checkStock.getStock();
-                stock.setId(checkStock.getId());
-                stock.setProduct(product);
-                stock.setStock(amount+newStockDto.getAmount());
+                newStock.setId(checkStock.getId());
+                newStock.setProduct(stock.getProduct());
+                newStock.setBrand(stock.getBrand());
+                newStock.setStock(amount+stock.getStock());
             }
-            return stockRepository.save(stock);
+            return stockRepository.save(newStock);
         } catch (Exception e) {
             throw new NotFoundException(e.getMessage());
         }
     }
 
     @Override
-    public Stock reduceStock(NewStockDto newStockDto) {
+    public Stock reduceStock(Stock stock) {
         Stock lessStock = new Stock();
-        Product product = productRepository.findByNameAndBrand(newStockDto.getProductName(),newStockDto.getProductBrand());
-        Stock checkStock=stockRepository.findByProduct(product);
-        if (checkStock.getStock()< newStockDto.getAmount()) {
-            throw new NotFoundException("No hay Stock suficiente");
+        Stock checkStock=stockRepository.findByProductAndBrand(stock.getProduct(),stock.getBrand());
+        if (checkStock.getStock()< stock.getStock()) {
+            throw new NotFoundException("No hay Stock suficiente, solo tiene :" +checkStock.getStock() );
         }
         try {
             float amount = checkStock.getStock();
             lessStock.setId(checkStock.getId());
-            lessStock.setProduct(product);
-            lessStock.setStock(amount-newStockDto.getAmount());
+            lessStock.setProduct(stock.getProduct());
+            lessStock.setBrand(stock.getBrand());
+            lessStock.setStock(amount-stock.getStock());
             return stockRepository.save(lessStock);
         } catch (Exception e) {
             throw new NotFoundException(e.getMessage());

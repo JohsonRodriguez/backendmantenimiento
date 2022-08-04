@@ -7,6 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 
 
 public interface StockRepository extends CrudRepository<Stock, Long> {
-    Stock findByProduct(Product product);
+    Stock findByProductAndBrand(String product, String brand);
+     Iterable<Stock> findAllByOrderByStockDesc();
 
 }

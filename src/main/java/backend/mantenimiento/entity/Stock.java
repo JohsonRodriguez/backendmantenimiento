@@ -17,9 +17,11 @@ public class Stock {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String product;
+    private String brand;
     private float stock;
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "product_id")
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private Product product;
+//    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+//    @JoinColumn(name = "product_id")
+//    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+//    private Product product;
 }

@@ -1,22 +1,33 @@
 package backend.mantenimiento.services;
 
 import backend.mantenimiento.Dto.ProductBrandDto;
+import backend.mantenimiento.Dto.ProductDto;
 import backend.mantenimiento.Dto.ProductNameDTO;
+import backend.mantenimiento.entity.Brand;
 import backend.mantenimiento.entity.Product;
+import backend.mantenimiento.entity.Stock;
 import backend.mantenimiento.exception.NotFoundException;
 import backend.mantenimiento.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 
 @Service
+@Transactional
 public class ProductServiceImpl implements ProductService{
 
-    private ProductRepository productRepository;
-
-    public ProductServiceImpl(ProductRepository productRepository){
+    private  final ProductRepository productRepository;
+    private final BrandService brandService;
+    private final StockService stockService;
+    Brand Brand,checkBrand;
+    Product product,checkProduct;
+    public ProductServiceImpl(ProductRepository productRepository, BrandService brandService, StockService stockService) {
         this.productRepository = productRepository;
+        this.brandService = brandService;
+        this.stockService = stockService;
     }
+
 
     @Override
     public Iterable<Product> listProduct() {
@@ -24,16 +35,54 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
-    public Product newProduct(Product product) {
-        var checkProduct = productRepository.findByNameAndBrand(product.getName(), product.getBrand());
-        if (checkProduct != null) throw new NotFoundException("Producto ya registrado");
-        Product newProduct = null;
-        try {
-            return newProduct = productRepository.save(product);
-        } catch (Exception e) {
-            throw new NotFoundException(e.getMessage());
+    public void newProduct(ProductDto productDto) {
+
+        getBrand(productDto.getBrandName());
+        getProduct(productDto.getProductName(),productDto.getUnit());
+            var allBrands = product.getBrands();
+            for (Brand b : allBrands) {
+              boolean check = b.getName().contains(checkBrand.getName());
+               if (check) {
+                throw new NotFoundException("Producto ya está registrado, ingrese otra marca");
+               }
+            }
+        product.getBrands().add(checkBrand);
+        Stock stock = new Stock();
+        stock.setProduct(product.getName());
+        stock.setBrand(checkBrand.getName());
+        stock.setStock(0);
+        stockService.newStock(stock);
+
+    }
+
+    private void getProduct(String name,String unit) {
+        var checkProduct = productRepository.findByName(name);
+        if (checkProduct == null) {
+            Product newProduct = new Product();
+            newProduct.setName(name);
+            newProduct.setUnit(unit);
+            try {
+                product = productRepository.save(newProduct);
+            } catch (Exception e) {
+                throw new NotFoundException(e.getMessage());
+            }
+        }else{
+            product=checkProduct;
         }
 
+    }
+
+    private void getBrand(String name) {
+         checkBrand = brandService.searchBrand(name);
+        if (checkBrand == null) {
+            try {
+                checkBrand = brandService.newBrand(name);
+            } catch (Exception e) {
+                throw new NotFoundException(e.getMessage());
+            }
+        }else{
+            checkBrand = brandService.searchBrand(name);
+        }
     }
 
     @Override

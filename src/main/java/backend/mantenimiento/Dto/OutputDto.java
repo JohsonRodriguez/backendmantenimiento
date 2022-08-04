@@ -11,7 +11,7 @@ public class OutputDto {
     private float amount;
     private String productName;
     private String productBrand;
-    private Long users;
-    private Long employee;
-    private Long location;
+    private String users;
+    private String employee;
+    private String location;
 }

@@ -4,7 +4,10 @@ package backend.mantenimiento.services;
 import backend.mantenimiento.Dto.AllIput;
 import backend.mantenimiento.Dto.InputDto;
 import backend.mantenimiento.Dto.NewStockDto;
+import backend.mantenimiento.Dto.ProductDto;
 import backend.mantenimiento.entity.Input;
+import backend.mantenimiento.entity.Product;
+import backend.mantenimiento.entity.Stock;
 import backend.mantenimiento.repository.InputRepository;
 import backend.mantenimiento.repository.ProductRepository;
 import backend.mantenimiento.repository.UsersRepository;
@@ -43,25 +46,29 @@ public class InputServiceImpl implements InputService{
 
     @Override
     public void newInput(InputDto inputDto) {
-        NewStockDto newStock = new NewStockDto();
-        newStock.setProductName(inputDto.getProductName());
-        newStock.setProductBrand(inputDto.getProductBrand());
-        newStock.setAmount(inputDto.getAmount());
-        var stock=stockService.newStock(newStock);
-        var users  =(usersRepository.findById(inputDto.getUsers())).get();
-        var day = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-        var amount=inputDto.getAmount();
-        Input input = new Input();
+      var day = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+      Input input = new Input();
       input.setDay(day);
-      input.setAmount(amount);
-      input.setStock(stock);
-      input.setUsers(users);
+      input.setAmount(inputDto.getAmount());
+      input.setProduct(inputDto.getProduct());
+      input.setBrand(inputDto.getBrand());
+      input.setUsers(inputDto.getUsers());
+        Stock stock = new Stock();
+        stock.setProduct(inputDto.getProduct());
+        stock.setBrand(inputDto.getBrand());
+        stock.setStock(inputDto.getAmount());
+      stockService.newStock(stock);
       inputRepository.save(input);
     }
 
     @Override
     public ArrayList<AllIput> getAllInput(String day) {
-        ArrayList<AllIput> allInputs = inputRepository.totalInput(day);
-        return allInputs;
+        return null;
     }
+
+//    @Override
+//    public ArrayList<AllIput> getAllInput(String day) {
+//        ArrayList<AllIput> allInputs = inputRepository.totalInput(day);
+//        return allInputs;
+//    }
 }

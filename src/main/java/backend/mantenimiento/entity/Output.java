@@ -19,20 +19,24 @@ public class Output {
     private Long id;
     private String day;
     private float amount;
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "users_id")
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private Users users;
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "stock_id")
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private Stock stock;
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "location_id")
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private Location location;
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "employee_id")
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private Employee employee;
+    private String users;
+    private String location;
+    private String employee;
+
+//    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+//    @JoinColumn(name = "users_id")
+//    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+//    private Users users;
+//    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+//    @JoinColumn(name = "stock_id")
+//    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+//    private Stock stock;
+//    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+//    @JoinColumn(name = "location_id")
+//    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+//    private Location location;
+//    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+//    @JoinColumn(name = "employee_id")
+//    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+//    private Employee employee;
 }

@@ -19,11 +19,15 @@ public class Input {
     private Long id;
     private String day;
     private float amount;
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "stock_id")
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private Stock stock;
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "users_id")
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private Users users;}
+    private String product;
+    private String brand;
+    private String users;
+//    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+//    @JoinColumn(name = "stock_id")
+//    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+//    private Stock stock;
+//    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+//    @JoinColumn(name = "users_id")
+//    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+//    private Users users;
+   }

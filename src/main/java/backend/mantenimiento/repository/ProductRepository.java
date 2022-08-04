@@ -14,12 +14,13 @@ import java.util.List;
 
 public interface ProductRepository extends CrudRepository<Product,Long> {
     Product findByName(String name);
-    Product findByNameAndBrand(String name, String brand);
+
+//    Product findByNameAndBrand(String name, String brand);
 
        @Query("select new backend.mantenimiento.Dto.ProductNameDTO(p.name) from Product p group by p.name")
        ArrayList<ProductNameDTO> getProductName ();
 
-    @Query("select new backend.mantenimiento.Dto.ProductBrandDto(p.brand) from Product p where p.name= :name")
+    @Query("select new backend.mantenimiento.Dto.ProductBrandDto(p.name) from Product p where p.name= :name")
     ArrayList<ProductBrandDto> getProductBrand (@Param(value = "name")String name);
 
 

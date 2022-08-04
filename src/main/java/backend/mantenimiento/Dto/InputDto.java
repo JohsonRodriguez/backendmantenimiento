@@ -9,8 +9,9 @@ import lombok.Setter;
 @Setter
 public class InputDto {
     private float amount;
-    private Long users;
-    private String productName;
-    private String productBrand;
+    private String product;
+    private String brand;
+    private String users;
+
 
 }
