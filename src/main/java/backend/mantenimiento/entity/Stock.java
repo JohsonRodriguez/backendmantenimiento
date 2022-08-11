@@ -20,6 +20,7 @@ public class Stock {
     private String product;
     private String brand;
     private float stock;
+    private String unit;
 //    @ManyToOne(fetch = FetchType.LAZY, optional = false)
 //    @JoinColumn(name = "product_id")
 //    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})

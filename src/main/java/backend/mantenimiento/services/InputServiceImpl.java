@@ -53,10 +53,12 @@ public class InputServiceImpl implements InputService{
       input.setProduct(inputDto.getProduct());
       input.setBrand(inputDto.getBrand());
       input.setUsers(inputDto.getUsers());
+      input.setUnit(inputDto.getUnit());
         Stock stock = new Stock();
         stock.setProduct(inputDto.getProduct());
         stock.setBrand(inputDto.getBrand());
         stock.setStock(inputDto.getAmount());
+        stock.setUnit(inputDto.getUnit());
       stockService.newStock(stock);
       inputRepository.save(input);
     }

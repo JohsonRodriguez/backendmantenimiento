@@ -51,6 +51,7 @@ public class ProductServiceImpl implements ProductService{
         stock.setProduct(product.getName());
         stock.setBrand(checkBrand.getName());
         stock.setStock(0);
+        stock.setUnit(product.getUnit());
         stockService.newStock(stock);
 
     }

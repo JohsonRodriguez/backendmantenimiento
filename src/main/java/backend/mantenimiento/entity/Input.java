@@ -22,6 +22,7 @@ public class Input {
     private String product;
     private String brand;
     private String users;
+    private String unit;
 //    @ManyToOne(fetch = FetchType.LAZY, optional = false)
 //    @JoinColumn(name = "stock_id")
 //    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})

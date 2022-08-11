@@ -12,6 +12,7 @@ public class InputDto {
     private String product;
     private String brand;
     private String users;
+    private String unit;
 
 
 }

@@ -37,12 +37,14 @@ public class StockServiceImpl implements StockService{
                 newStock.setProduct(stock.getProduct());
                 newStock.setBrand(stock.getBrand());
                 newStock.setStock(stock.getStock());
+                newStock.setUnit(stock.getUnit());
             }else{
                 float amount = checkStock.getStock();
                 newStock.setId(checkStock.getId());
                 newStock.setProduct(stock.getProduct());
                 newStock.setBrand(stock.getBrand());
                 newStock.setStock(amount+stock.getStock());
+                newStock.setUnit(stock.getUnit());
             }
             return stockRepository.save(newStock);
         } catch (Exception e) {
@@ -63,6 +65,7 @@ public class StockServiceImpl implements StockService{
             lessStock.setProduct(stock.getProduct());
             lessStock.setBrand(stock.getBrand());
             lessStock.setStock(amount-stock.getStock());
+            lessStock.setUnit(stock.getUnit());
             return stockRepository.save(lessStock);
         } catch (Exception e) {
             throw new NotFoundException(e.getMessage());
