@@ -71,31 +71,32 @@ public class OutputServiceImpl implements OutputService{
 
     @Override
     public ArrayList<OutputTotalDto> getTotalAmount(OutputCountDto outputCountDto) {
-//       ArrayList arrayList = outputRepository.totalAmount(outputCountDto.getProduct(),outputCountDto.getDate());
-//        Collections.sort(arrayList, new Comparator<OutputTotalDto>() {
-//
-//            @Override
-//            public int compare(OutputTotalDto o1, OutputTotalDto o2) {
-//                return (o2.getTotal()).compareTo((o1.getTotal()));
-//            }
-//        });
-//        return arrayList;
+       ArrayList arrayList = outputRepository.totalAmount(outputCountDto.getProduct(),outputCountDto.getDate());
+        Collections.sort(arrayList, new Comparator<OutputTotalDto>() {
+
+            @Override
+            public int compare(OutputTotalDto o1, OutputTotalDto o2) {
+                return (o2.getTotal()).compareTo((o1.getTotal()));
+            }
+        });
+
 //        return outputRepository.totalAmount(outputCountDto.getProduct(),outputCountDto.getDate());
-        return null;
+        return arrayList;
+
     }
 
     @Override
     public ArrayList<EmployeeTotalDto> getTotalAmountEmployee(OutputCountDto outputCountDto) {
-//        ArrayList arrayListEmployee = outputRepository.totalAmountEmployee(outputCountDto.getProduct(),outputCountDto.getDate());
-//        Collections.sort(arrayListEmployee, new Comparator<EmployeeTotalDto>() {
-//
-//            @Override
-//            public int compare(EmployeeTotalDto e1, EmployeeTotalDto e2) {
-//                return (e2.getTotal()).compareTo((e1.getTotal()));
-//            }
-//        });
-//        return  arrayListEmployee;
-        return null;
+        ArrayList arrayListEmployee = outputRepository.totalAmountEmployee(outputCountDto.getProduct(),outputCountDto.getDate());
+        Collections.sort(arrayListEmployee, new Comparator<EmployeeTotalDto>() {
+
+            @Override
+            public int compare(EmployeeTotalDto e1, EmployeeTotalDto e2) {
+                return (e2.getTotal()).compareTo((e1.getTotal()));
+            }
+        });
+        return  arrayListEmployee;
+
     }
 
     @Override
