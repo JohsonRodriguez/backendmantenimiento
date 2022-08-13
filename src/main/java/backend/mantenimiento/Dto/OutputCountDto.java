@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 public class OutputCountDto {
 
-    private Long product;
+    private String product;
     private String date;
 
 

@@ -6,15 +6,11 @@ import lombok.Setter;
 @Getter
 @Setter
 public class EmployeeTotalDto {
-    private Long id;
-    private String name;
-    private String lastname;
+    private String employee;
     private Double total;
 
-    public EmployeeTotalDto(Long id, String name, String lastname, Double total) {
-        this.id = id;
-        this.name = name;
-        this.lastname = lastname;
+    public EmployeeTotalDto(String employee, Double total) {
+        this.employee = employee;
         this.total = total;
     }
 }
