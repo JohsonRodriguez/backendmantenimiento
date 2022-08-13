@@ -20,6 +20,8 @@ public class Output {
     private String day;
     private float amount;
     private String users;
+    private String product;
+    private String brand;
     private String location;
     private String employee;
     private String unit;

@@ -52,6 +52,8 @@ public class OutputServiceImpl implements OutputService{
             output.setUsers(outputDto.getUsers());
             output.setLocation(outputDto.getLocation());
             output.setEmployee(outputDto.getEmployee());
+            output.setProduct(outputDto.getProductName());
+            output.setBrand(outputDto.getProductBrand());
             output.setUnit(outputDto.getUnit());
             Stock stock = new Stock();
             stock.setProduct(outputDto.getProductName());
