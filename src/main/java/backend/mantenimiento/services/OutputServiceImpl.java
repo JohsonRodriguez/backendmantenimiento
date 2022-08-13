@@ -97,9 +97,8 @@ public class OutputServiceImpl implements OutputService{
     }
 
     @Override
-    public ArrayList<AllOutputs> getAllOutputs(String day) {
-//        ArrayList<AllOutputs> allOutputsList = outputRepository.OutputsbyDay(day);
-//        return allOutputsList;
-        return null;
+    public ArrayList<Output> getAllOutputs(String day) {
+        return outputRepository.OutputsbyDay(day);
+
     }
 }

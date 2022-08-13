@@ -4,6 +4,7 @@ import backend.mantenimiento.Dto.AllOutputs;
 import backend.mantenimiento.Dto.EmployeeTotalDto;
 import backend.mantenimiento.Dto.OutputTotalDto;
 
+import backend.mantenimiento.entity.Input;
 import backend.mantenimiento.entity.Output;
 import org.hibernate.mapping.Array;
 import org.springframework.data.jpa.repository.Modifying;
@@ -30,5 +31,8 @@ public interface OutputRepository extends CrudRepository<Output,Long> {
 //
 //    @Query("SELECT new backend.mantenimiento.Dto.AllOutputs(o.stock.product,o.stock.brand,o.location.name,o.users.name,o.employee.name,o.employee.lastname,o.amount)  FROM Output as o WHERE o.day=:day")
 //    ArrayList<AllOutputs> OutputsbyDay (@Param(value = "day")String day);
+
+    @Query("SELECT o FROM Output o WHERE o.day=:day")
+    ArrayList<Output> OutputsbyDay (@Param(value = "day")String day);
 
 }

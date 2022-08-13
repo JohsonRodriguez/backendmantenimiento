@@ -50,7 +50,7 @@ public class OutputController {
     }
 
     @PostMapping("/allbyday/{day}")
-    public ArrayList<AllOutputs> getAllOutputsbyDay(@PathVariable String day){
+    public ArrayList<Output> getAllOutputsbyDay(@PathVariable String day){
         return   outputService.getAllOutputs(day);
     }
 
