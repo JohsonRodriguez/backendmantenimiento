@@ -22,6 +22,7 @@ public class Output {
     private String users;
     private String location;
     private String employee;
+    private String unit;
 
 //    @ManyToOne(fetch = FetchType.LAZY, optional = false)
 //    @JoinColumn(name = "users_id")

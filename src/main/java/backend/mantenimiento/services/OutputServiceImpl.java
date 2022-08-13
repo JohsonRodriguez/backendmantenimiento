@@ -52,7 +52,7 @@ public class OutputServiceImpl implements OutputService{
             output.setUsers(outputDto.getUsers());
             output.setLocation(outputDto.getLocation());
             output.setEmployee(outputDto.getEmployee());
-
+            output.setUnit(outputDto.getUnit());
             Stock stock = new Stock();
             stock.setProduct(outputDto.getProductName());
             stock.setBrand(outputDto.getProductBrand());
