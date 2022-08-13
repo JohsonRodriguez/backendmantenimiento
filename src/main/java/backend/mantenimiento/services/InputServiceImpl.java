@@ -63,14 +63,10 @@ public class InputServiceImpl implements InputService{
       inputRepository.save(input);
     }
 
-    @Override
-    public ArrayList<AllIput> getAllInput(String day) {
-        return null;
-    }
 
-//    @Override
-//    public ArrayList<AllIput> getAllInput(String day) {
-//        ArrayList<AllIput> allInputs = inputRepository.totalInput(day);
-//        return allInputs;
-//    }
+
+    @Override
+    public ArrayList<Input> getAllInput(String day) {
+        return inputRepository.totalInput(day);
+    }
 }

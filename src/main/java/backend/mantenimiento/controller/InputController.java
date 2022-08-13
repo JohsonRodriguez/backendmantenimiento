@@ -30,7 +30,7 @@ public class InputController {
     }
 
     @PostMapping("/getall/{day}")
-    public ArrayList<AllIput> getAllInputs(@PathVariable String day) {
+    public ArrayList<Input> getAllInputs(@PathVariable String day) {
        return inputService.getAllInput(day);
     }
 

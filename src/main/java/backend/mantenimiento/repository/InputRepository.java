@@ -14,4 +14,6 @@ public interface InputRepository extends CrudRepository<Input,Long> {
 
 //    ArrayList<AllIput> totalInput (@Param(value = "day")String day);
 
+       @Query("SELECT i FROM Input i WHERE i.day=:day")
+    ArrayList<Input> totalInput (@Param(value = "day")String day);
 }
