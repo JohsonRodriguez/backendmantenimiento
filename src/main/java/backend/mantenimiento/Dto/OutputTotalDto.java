@@ -9,13 +9,11 @@ import java.util.HashMap;
 
 @Getter
 @Setter
-
+@AllArgsConstructor
 public class OutputTotalDto {
    private String name;
     private Double total;
+    private String unit;
 
-    public OutputTotalDto( String name, Double total) {
-        this.name = name;
-        this.total = total;
-    }
+
 }

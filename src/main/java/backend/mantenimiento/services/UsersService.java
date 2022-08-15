@@ -1,6 +1,7 @@
 package backend.mantenimiento.services;
 
 
+import backend.mantenimiento.Dto.UserDto;
 import backend.mantenimiento.entity.Users;
 
 public interface UsersService {
@@ -9,4 +10,5 @@ public interface UsersService {
     void updateUsers(Users users);
     Long countUsers();
     Users searchUsers(String name);
+    UserDto loginUser(String username, String password);
 }

@@ -3,15 +3,13 @@ package backend.mantenimiento.Dto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @AllArgsConstructor
-public class EmployeeTotalDto {
-    private String employee;
-    private Double total;
-    private String unit;
-
-
+@ToString
+public class Login {
+    private String username;
+    private String password;
 }
-
