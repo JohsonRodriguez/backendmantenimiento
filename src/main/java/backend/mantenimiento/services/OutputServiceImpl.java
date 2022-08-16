@@ -59,6 +59,7 @@ public class OutputServiceImpl implements OutputService{
             stock.setProduct(outputDto.getProductName());
             stock.setBrand(outputDto.getProductBrand());
             stock.setStock(outputDto.getAmount());
+            stock.setUnit(outputDto.getUnit());
             stockService.reduceStock(stock);
 
             outputRepository.save(output);
