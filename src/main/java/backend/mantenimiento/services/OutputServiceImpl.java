@@ -105,4 +105,16 @@ public class OutputServiceImpl implements OutputService{
         return outputRepository.OutputsbyDay(day);
 
     }
+
+    @Override
+    public ArrayList<ProductByMonth> totalAmountByMounth(String day) {
+        ArrayList arrayListProduct =outputRepository.totalAmountByMounth(day);
+        Collections.sort(arrayListProduct, new Comparator<ProductByMonth>() {
+            @Override
+            public int compare(ProductByMonth e1, ProductByMonth e2) {
+                return (e2.getTotal()).compareTo((e1.getTotal()));
+            }
+        });
+        return arrayListProduct;
+    }
 }

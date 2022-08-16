@@ -15,4 +15,5 @@ public interface OutputService {
     ArrayList<OutputTotalDto> getTotalAmount(OutputCountDto outputCountDto);
     ArrayList<EmployeeTotalDto> getTotalAmountEmployee(OutputCountDto outputCountDto);
     ArrayList<Output>getAllOutputs(String day);
+    ArrayList<ProductByMonth> totalAmountByMounth(String day);
 }

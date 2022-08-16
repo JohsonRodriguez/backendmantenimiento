@@ -4,6 +4,7 @@ import backend.mantenimiento.Dto.AllOutputs;
 import backend.mantenimiento.Dto.EmployeeTotalDto;
 import backend.mantenimiento.Dto.OutputTotalDto;
 
+import backend.mantenimiento.Dto.ProductByMonth;
 import backend.mantenimiento.entity.Input;
 import backend.mantenimiento.entity.Output;
 import org.hibernate.mapping.Array;
@@ -29,9 +30,13 @@ public interface OutputRepository extends CrudRepository<Output,Long> {
     ArrayList<EmployeeTotalDto> totalAmountEmployee (@Param(value = "product")String product,
                                                      @Param(value = "date")String date);
 //
+@Query("SELECT new backend.mantenimiento.Dto.ProductByMonth(o.product,SUM(o.amount),o.unit)  FROM Output as o WHERE o.day LIKE :date% group by o.product,o.unit")
+ArrayList<ProductByMonth> totalAmountByMounth (@Param(value = "date")String date);
+//
 
 
     @Query("SELECT o FROM Output o WHERE o.day=:day")
     ArrayList<Output> OutputsbyDay (@Param(value = "day")String day);
+
 
 }

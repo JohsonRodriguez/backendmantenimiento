@@ -54,4 +54,9 @@ public class OutputController {
         return   outputService.getAllOutputs(day);
     }
 
+    @PostMapping("/allbymonth/{month}")
+    public ArrayList<ProductByMonth> getAllOutputsbyMonth(@PathVariable String month){
+        return   outputService.totalAmountByMounth(month);
+    }
+
 }
